@@ -20,9 +20,9 @@ import { personalInfo } from '../data/portfolioData';
 // 3. Create an Email Template — use these variables in the template:
 //      {{from_name}}  {{from_email}}  {{subject}}  {{message}}
 // 4. Replace the three placeholder strings below with your real IDs
-const EMAILJS_SERVICE_ID  = 'YOUR_SERVICE_ID';   // e.g. 'service_abc123'
-const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';  // e.g. 'template_xyz789'
-const EMAILJS_PUBLIC_KEY  = 'YOUR_PUBLIC_KEY';   // e.g. 'abcDEFghiJKL'
+const EMAILJS_SERVICE_ID  = 'service_h06pxok';
+const EMAILJS_TEMPLATE_ID = 'template_icnruku';
+const EMAILJS_PUBLIC_KEY  = '2pwvxJAwbPtfEEt2D';
 // ──────────────────────────────────────────────────────────────────
 
 const contactLinks = [
