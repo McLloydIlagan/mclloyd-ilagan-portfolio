@@ -94,7 +94,7 @@ export default function Navbar() {
           {/* CTA + Mobile Toggle */}
           <div className="flex items-center gap-3">
             <a
-              href="mailto:Lloydilagan771@gmail.com"
+              href="mailto:lloydilagan771@gmail.com"
               className="hidden sm:inline-flex btn-primary text-sm py-2 px-4"
             >
               Hire Me
@@ -139,7 +139,7 @@ export default function Navbar() {
               ))}
               <li>
                 <a
-                  href="mailto:Lloydilagan771@gmail.com"
+                  href="mailto:lloydilagan771@gmail.com"
                   className="block btn-primary text-center mt-2"
                 >
                   Hire Me
