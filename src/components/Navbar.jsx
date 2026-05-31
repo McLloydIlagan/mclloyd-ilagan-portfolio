@@ -94,7 +94,8 @@ export default function Navbar() {
           {/* CTA + Mobile Toggle */}
           <div className="flex items-center gap-3">
             <a
-              href="mailto:lloydilagan771@gmail.com"
+              href="#contact"
+              onClick={(e) => { e.preventDefault(); handleNavClick('#contact'); }}
               className="hidden sm:inline-flex btn-primary text-sm py-2 px-4"
             >
               Hire Me
@@ -139,7 +140,8 @@ export default function Navbar() {
               ))}
               <li>
                 <a
-                  href="mailto:lloydilagan771@gmail.com"
+                  href="#contact"
+                  onClick={(e) => { e.preventDefault(); handleNavClick('#contact'); setMenuOpen(false); }}
                   className="block btn-primary text-center mt-2"
                 >
                   Hire Me
