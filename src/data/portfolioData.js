@@ -2,7 +2,7 @@ export const personalInfo = {
   name: "Mc Lloyd Silverio Ilagan",
   title: "Computer Science Student",
   tagline: "Data Science | Cybersecurity Enthusiast",
-  email: "Lloydilagan771@gmail.com",
+  email: "lloydilagan771@gmail.com",
   phone: "+63 992 529 3843",
   github: "https://github.com/McLloydIlagan",
   linkedin: "https://www.linkedin.com/in/lloyd-ilagan-451279241/",
