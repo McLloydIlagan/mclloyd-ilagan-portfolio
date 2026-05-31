@@ -126,17 +126,23 @@ export default function Projects() {
                     <FaGithub size={14} aria-hidden="true" />
                     View Code
                   </a>
-                  <span className="text-slate-700" aria-hidden="true">|</span>
-                  <a
-                    href={project.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-1.5 text-xs text-slate-400 hover:text-cyan-400 transition-colors"
-                    aria-label={`View ${project.title} live demo`}
-                  >
-                    <FaExternalLinkAlt size={12} aria-hidden="true" />
-                    Live Demo
-                  </a>
+                  {project.demo ? (
+                    <>
+                      <span className="text-slate-700" aria-hidden="true">|</span>
+                      <a
+                        href={project.demo}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-1.5 text-xs text-slate-400 hover:text-cyan-400 transition-colors"
+                        aria-label={`View ${project.title} live demo`}
+                      >
+                        <FaExternalLinkAlt size={12} aria-hidden="true" />
+                        Live Demo
+                      </a>
+                    </>
+                  ) : (
+                    <span className="text-xs text-slate-600 italic">No live demo</span>
+                  )}
                 </div>
               </div>
             </motion.article>

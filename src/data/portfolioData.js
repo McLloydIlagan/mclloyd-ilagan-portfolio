@@ -162,6 +162,7 @@ export const projects = [
     icon: "FaChartLine",
     highlights: ["Price prediction", "ML models", "Technical indicators"],
     github: "https://github.com/McLloydIlagan/Cryptocurrency_Analysis_Tool",
+    demo: null,
   },
   {
     title: "MoodlePlus",
@@ -172,6 +173,7 @@ export const projects = [
     icon: "FaMobileAlt",
     highlights: ["Flutter mobile UI", "MEAN stack backend", "LMS enhancement"],
     github: "https://github.com/McLloydIlagan/MoodlePlus",
+    demo: null,
   },
   {
     title: "ILISY Golf & Country Club Enrollment System",
@@ -182,6 +184,7 @@ export const projects = [
     icon: "FaGlobeAsia",
     highlights: ["Member enrollment", "MEAN stack backend", "Responsive web UI"],
     github: "https://github.com/McLloydIlagan/ILISY_Golf_And_Country_Club_Enrollment_System",
+    demo: null,
   },
   {
     title: "Pokémon Battle Simulation",
@@ -192,6 +195,7 @@ export const projects = [
     icon: "FaGamepad",
     highlights: ["Battle logic engine", "Damage calculation", "Type effectiveness system"],
     github: "https://github.com/McLloydIlagan/pokemon-battle-simulation",
+    demo: null,
   },
 ];
 
