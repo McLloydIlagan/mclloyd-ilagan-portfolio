@@ -150,10 +150,9 @@ export default function Hero() {
                 Contact Me <FaArrowRight aria-hidden="true" />
               </a>
               <a
-                href="/resume.pdf"
-                download
+                href={`mailto:${personalInfo.email}?subject=Resume Request&body=Hi Lloyd, could you please send me your resume?`}
                 className="btn-outline"
-                aria-label="Download resume PDF"
+                aria-label="Request resume via email"
               >
                 <FaDownload aria-hidden="true" /> Download Resume
               </a>
@@ -215,7 +214,7 @@ export default function Hero() {
                 <div className="w-full h-full rounded-full bg-slate-900 flex items-center justify-center overflow-hidden">
                   {/* Real profile photo */}
                   <img
-                    src="/mclloyd-ilagan-portfolio/profile.jpg"
+                    src="/mclloyd-ilagan-portfolio/profile.png"
                     alt="Mc Lloyd Silverio Ilagan — profile photo"
                     className="w-full h-full object-cover object-top"
                   />

@@ -6,13 +6,15 @@ import {
   FaChartLine,
   FaBookOpen,
   FaClipboardList,
+  FaMobileAlt,
+  FaGlobeAsia,
   FaGithub,
   FaExternalLinkAlt,
 } from 'react-icons/fa';
 import SectionWrapper, { SectionTitle } from './SectionWrapper';
 import { projects } from '../data/portfolioData';
 
-const iconMap = { FaGamepad, FaMapMarkedAlt, FaBuilding, FaChartLine, FaBookOpen, FaClipboardList };
+const iconMap = { FaGamepad, FaMapMarkedAlt, FaBuilding, FaChartLine, FaBookOpen, FaClipboardList, FaMobileAlt, FaGlobeAsia };
 
 const containerVariants = {
   hidden: {},

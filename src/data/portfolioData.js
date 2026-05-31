@@ -166,21 +166,21 @@ export const projects = [
   {
     title: "MoodlePlus",
     description:
-      "An enhanced Moodle-based learning management system extension with additional features for students and educators.",
-    tech: ["Web Development", "LMS", "PHP"],
+      "A Flutter mobile application built with a MEAN stack backend (MongoDB, Express, Node.js) that enhances the Moodle learning experience for students and educators.",
+    tech: ["Flutter", "MongoDB", "Express", "Node.js"],
     color: "#0066ff",
-    icon: "FaBookOpen",
-    highlights: ["LMS enhancement", "Student tools", "Educator features"],
+    icon: "FaMobileAlt",
+    highlights: ["Flutter mobile UI", "MEAN stack backend", "LMS enhancement"],
     github: "https://github.com/McLloydIlagan/MoodlePlus",
   },
   {
     title: "ILISY Golf & Country Club Enrollment System",
     description:
-      "A full-featured enrollment and membership management system for ILISY Golf and Country Club, handling member registration and records.",
-    tech: ["Java", "Database", "Desktop App"],
+      "A full-featured membership enrollment and management website for ILISY Golf and Country Club, built with HTML, CSS, JavaScript, and a MEAN stack backend.",
+    tech: ["HTML", "CSS", "JavaScript", "MongoDB", "Express", "Node.js"],
     color: "#7c3aed",
-    icon: "FaClipboardList",
-    highlights: ["Member registration", "Records management", "Desktop GUI"],
+    icon: "FaGlobeAsia",
+    highlights: ["Member enrollment", "MEAN stack backend", "Responsive web UI"],
     github: "https://github.com/McLloydIlagan/ILISY_Golf_And_Country_Club_Enrollment_System",
   },
   {
@@ -191,7 +191,7 @@ export const projects = [
     color: "#00d4ff",
     icon: "FaGamepad",
     highlights: ["Battle logic engine", "Damage calculation", "Type effectiveness system"],
-    github: "https://github.com/McLloydIlagan",
+    github: "https://github.com/McLloydIlagan/pokemon-battle-simulation",
   },
 ];
 
