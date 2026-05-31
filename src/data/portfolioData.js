@@ -184,7 +184,7 @@ export const projects = [
     icon: "FaGlobeAsia",
     highlights: ["Member enrollment", "MEAN stack backend", "Responsive web UI"],
     github: "https://github.com/McLloydIlagan/ILISY_Golf_And_Country_Club_Enrollment_System",
-    demo: null,
+    demo: "https://mclloydilagan.github.io/ILISY_Golf_And_Country_Club_Enrollment_System/",
   },
   {
     title: "Pokémon Battle Simulation",
