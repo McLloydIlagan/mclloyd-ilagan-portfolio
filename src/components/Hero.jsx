@@ -150,9 +150,10 @@ export default function Hero() {
                 Contact Me <FaArrowRight aria-hidden="true" />
               </a>
               <a
-                href={`mailto:${personalInfo.email}?subject=Resume Request&body=Hi Lloyd, could you please send me your resume?`}
+                href="/mclloyd-ilagan-portfolio/Ilagan_McLloyd_resume.pdf"
+                download="Ilagan_McLloyd_resume.pdf"
                 className="btn-outline"
-                aria-label="Request resume via email"
+                aria-label="Download resume PDF"
               >
                 <FaDownload aria-hidden="true" /> Download Resume
               </a>

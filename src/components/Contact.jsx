@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
+import emailjs from '@emailjs/browser';
 import {
   FaEnvelope,
   FaPhone,
@@ -7,9 +8,22 @@ import {
   FaLinkedin,
   FaPaperPlane,
   FaCheckCircle,
+  FaExclamationCircle,
+  FaSpinner,
 } from 'react-icons/fa';
 import SectionWrapper, { SectionTitle } from './SectionWrapper';
 import { personalInfo } from '../data/portfolioData';
+
+// ─── EmailJS config ───────────────────────────────────────────────
+// 1. Sign up free at https://www.emailjs.com
+// 2. Add an Email Service (connect your Gmail)
+// 3. Create an Email Template — use these variables in the template:
+//      {{from_name}}  {{from_email}}  {{subject}}  {{message}}
+// 4. Replace the three placeholder strings below with your real IDs
+const EMAILJS_SERVICE_ID  = 'YOUR_SERVICE_ID';   // e.g. 'service_abc123'
+const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';  // e.g. 'template_xyz789'
+const EMAILJS_PUBLIC_KEY  = 'YOUR_PUBLIC_KEY';   // e.g. 'abcDEFghiJKL'
+// ──────────────────────────────────────────────────────────────────
 
 const contactLinks = [
   {
@@ -37,47 +51,79 @@ const contactLinks = [
   {
     icon: FaLinkedin,
     label: 'LinkedIn',
-    value: 'mclloydilagan',
+    value: 'lloyd-ilagan',
     href: personalInfo.linkedin,
     color: '#10b981',
     external: true,
   },
 ];
 
+const isConfigured =
+  EMAILJS_SERVICE_ID  !== 'YOUR_SERVICE_ID' &&
+  EMAILJS_TEMPLATE_ID !== 'YOUR_TEMPLATE_ID' &&
+  EMAILJS_PUBLIC_KEY  !== 'YOUR_PUBLIC_KEY';
+
 export default function Contact() {
-  const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' });
-  const [submitted, setSubmitted] = useState(false);
-  const [errors, setErrors] = useState({});
+  const formRef = useRef(null);
+  const [form, setForm]       = useState({ name: '', email: '', subject: '', message: '' });
+  const [status, setStatus]   = useState('idle'); // idle | sending | success | error
+  const [errors, setErrors]   = useState({});
 
   const validate = () => {
     const e = {};
-    if (!form.name.trim()) e.name = 'Name is required';
-    if (!form.email.trim()) e.email = 'Email is required';
-    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) e.email = 'Invalid email address';
+    if (!form.name.trim())    e.name    = 'Name is required';
+    if (!form.email.trim())   e.email   = 'Email is required';
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email))
+                              e.email   = 'Invalid email address';
     if (!form.message.trim()) e.message = 'Message is required';
     return e;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const errs = validate();
-    if (Object.keys(errs).length > 0) {
-      setErrors(errs);
+    if (Object.keys(errs).length > 0) { setErrors(errs); return; }
+    setErrors({});
+
+    // If EmailJS is not yet configured, fall back to mailto
+    if (!isConfigured) {
+      const subject = encodeURIComponent(form.subject || `Portfolio Contact from ${form.name}`);
+      const body    = encodeURIComponent(`Name: ${form.name}\nEmail: ${form.email}\n\n${form.message}`);
+      window.location.href = `mailto:${personalInfo.email}?subject=${subject}&body=${body}`;
+      setStatus('success');
       return;
     }
-    // Build mailto link
-    const subject = encodeURIComponent(form.subject || `Portfolio Contact from ${form.name}`);
-    const body = encodeURIComponent(
-      `Name: ${form.name}\nEmail: ${form.email}\n\n${form.message}`
-    );
-    window.location.href = `mailto:${personalInfo.email}?subject=${subject}&body=${body}`;
-    setSubmitted(true);
-    setErrors({});
+
+    setStatus('sending');
+    try {
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        {
+          from_name:  form.name,
+          from_email: form.email,
+          subject:    form.subject || `Portfolio Contact from ${form.name}`,
+          message:    form.message,
+          to_email:   personalInfo.email,
+        },
+        EMAILJS_PUBLIC_KEY
+      );
+      setStatus('success');
+      setForm({ name: '', email: '', subject: '', message: '' });
+    } catch (err) {
+      console.error('EmailJS error:', err);
+      setStatus('error');
+    }
   };
 
   const handleChange = (e) => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
     if (errors[e.target.name]) setErrors((prev) => ({ ...prev, [e.target.name]: '' }));
+  };
+
+  const reset = () => {
+    setStatus('idle');
+    setForm({ name: '', email: '', subject: '', message: '' });
   };
 
   return (
@@ -136,6 +182,33 @@ export default function Contact() {
               </motion.div>
             ))}
           </div>
+
+          {/* EmailJS setup notice */}
+          {!isConfigured && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              className="glass rounded-xl p-4 border-l-4 border-yellow-500/60"
+            >
+              <p className="text-yellow-400 text-xs font-mono font-semibold mb-1">
+                ⚠ Email service not configured yet
+              </p>
+              <p className="text-slate-500 text-xs leading-relaxed">
+                The form currently opens your email client as a fallback.
+                To enable direct sending, set up{' '}
+                <a
+                  href="https://www.emailjs.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-cyan-400 underline"
+                >
+                  EmailJS
+                </a>{' '}
+                and add your IDs to <code className="text-slate-400">Contact.jsx</code>.
+              </p>
+            </motion.div>
+          )}
         </div>
 
         {/* Right — Contact Form */}
@@ -145,22 +218,36 @@ export default function Contact() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          {submitted ? (
-            <div className="glass rounded-2xl p-8 flex flex-col items-center justify-center gap-4 text-center h-full min-h-64">
+          {status === 'success' ? (
+            <div className="glass rounded-2xl p-8 flex flex-col items-center justify-center gap-4 text-center min-h-64">
               <FaCheckCircle className="text-cyan-400 text-5xl" aria-hidden="true" />
               <h3 className="text-xl font-bold text-white">Message Sent!</h3>
               <p className="text-slate-400 text-sm">
-                Your email client should have opened. I'll get back to you as soon as possible.
+                {isConfigured
+                  ? "Thanks for reaching out. I'll get back to you as soon as possible."
+                  : 'Your email client should have opened with the message pre-filled.'}
               </p>
-              <button
-                onClick={() => { setSubmitted(false); setForm({ name: '', email: '', subject: '', message: '' }); }}
-                className="btn-outline text-sm py-2 px-5"
-              >
+              <button onClick={reset} className="btn-outline text-sm py-2 px-5">
                 Send Another
+              </button>
+            </div>
+          ) : status === 'error' ? (
+            <div className="glass rounded-2xl p-8 flex flex-col items-center justify-center gap-4 text-center min-h-64">
+              <FaExclamationCircle className="text-red-400 text-5xl" aria-hidden="true" />
+              <h3 className="text-xl font-bold text-white">Something went wrong</h3>
+              <p className="text-slate-400 text-sm">
+                Could not send the message. Please email me directly at{' '}
+                <a href={`mailto:${personalInfo.email}`} className="text-cyan-400 underline">
+                  {personalInfo.email}
+                </a>
+              </p>
+              <button onClick={reset} className="btn-outline text-sm py-2 px-5">
+                Try Again
               </button>
             </div>
           ) : (
             <form
+              ref={formRef}
               onSubmit={handleSubmit}
               className="glass rounded-2xl p-6 sm:p-8 space-y-4"
               noValidate
@@ -172,50 +259,28 @@ export default function Contact() {
                     Your Name *
                   </label>
                   <input
-                    id="name"
-                    name="name"
-                    type="text"
-                    value={form.name}
-                    onChange={handleChange}
-                    placeholder="John Doe"
-                    required
-                    aria-required="true"
+                    id="name" name="name" type="text"
+                    value={form.name} onChange={handleChange}
+                    placeholder="John Doe" required aria-required="true"
                     aria-invalid={!!errors.name}
                     aria-describedby={errors.name ? 'name-error' : undefined}
-                    className={`w-full bg-slate-900/60 border rounded-xl px-4 py-3 text-sm text-slate-300 placeholder-slate-600 focus:outline-none focus:border-cyan-400/60 transition-colors ${
-                      errors.name ? 'border-red-500/60' : 'border-slate-700/60'
-                    }`}
+                    className={`w-full bg-slate-900/60 border rounded-xl px-4 py-3 text-sm text-slate-300 placeholder-slate-600 focus:outline-none focus:border-cyan-400/60 transition-colors ${errors.name ? 'border-red-500/60' : 'border-slate-700/60'}`}
                   />
-                  {errors.name && (
-                    <p id="name-error" className="text-red-400 text-xs mt-1" role="alert">
-                      {errors.name}
-                    </p>
-                  )}
+                  {errors.name && <p id="name-error" className="text-red-400 text-xs mt-1" role="alert">{errors.name}</p>}
                 </div>
                 <div>
                   <label htmlFor="email" className="block text-xs font-mono text-slate-400 mb-1.5">
                     Email Address *
                   </label>
                   <input
-                    id="email"
-                    name="email"
-                    type="email"
-                    value={form.email}
-                    onChange={handleChange}
-                    placeholder="john@example.com"
-                    required
-                    aria-required="true"
+                    id="email" name="email" type="email"
+                    value={form.email} onChange={handleChange}
+                    placeholder="john@example.com" required aria-required="true"
                     aria-invalid={!!errors.email}
                     aria-describedby={errors.email ? 'email-error' : undefined}
-                    className={`w-full bg-slate-900/60 border rounded-xl px-4 py-3 text-sm text-slate-300 placeholder-slate-600 focus:outline-none focus:border-cyan-400/60 transition-colors ${
-                      errors.email ? 'border-red-500/60' : 'border-slate-700/60'
-                    }`}
+                    className={`w-full bg-slate-900/60 border rounded-xl px-4 py-3 text-sm text-slate-300 placeholder-slate-600 focus:outline-none focus:border-cyan-400/60 transition-colors ${errors.email ? 'border-red-500/60' : 'border-slate-700/60'}`}
                   />
-                  {errors.email && (
-                    <p id="email-error" className="text-red-400 text-xs mt-1" role="alert">
-                      {errors.email}
-                    </p>
-                  )}
+                  {errors.email && <p id="email-error" className="text-red-400 text-xs mt-1" role="alert">{errors.email}</p>}
                 </div>
               </div>
 
@@ -224,11 +289,8 @@ export default function Contact() {
                   Subject
                 </label>
                 <input
-                  id="subject"
-                  name="subject"
-                  type="text"
-                  value={form.subject}
-                  onChange={handleChange}
+                  id="subject" name="subject" type="text"
+                  value={form.subject} onChange={handleChange}
                   placeholder="Project Inquiry / Collaboration"
                   className="w-full bg-slate-900/60 border border-slate-700/60 rounded-xl px-4 py-3 text-sm text-slate-300 placeholder-slate-600 focus:outline-none focus:border-cyan-400/60 transition-colors"
                 />
@@ -239,30 +301,33 @@ export default function Contact() {
                   Message *
                 </label>
                 <textarea
-                  id="message"
-                  name="message"
-                  rows={5}
-                  value={form.message}
-                  onChange={handleChange}
+                  id="message" name="message" rows={5}
+                  value={form.message} onChange={handleChange}
                   placeholder="Tell me about your project or opportunity..."
-                  required
-                  aria-required="true"
+                  required aria-required="true"
                   aria-invalid={!!errors.message}
                   aria-describedby={errors.message ? 'message-error' : undefined}
-                  className={`w-full bg-slate-900/60 border rounded-xl px-4 py-3 text-sm text-slate-300 placeholder-slate-600 focus:outline-none focus:border-cyan-400/60 transition-colors resize-none ${
-                    errors.message ? 'border-red-500/60' : 'border-slate-700/60'
-                  }`}
+                  className={`w-full bg-slate-900/60 border rounded-xl px-4 py-3 text-sm text-slate-300 placeholder-slate-600 focus:outline-none focus:border-cyan-400/60 transition-colors resize-none ${errors.message ? 'border-red-500/60' : 'border-slate-700/60'}`}
                 />
-                {errors.message && (
-                  <p id="message-error" className="text-red-400 text-xs mt-1" role="alert">
-                    {errors.message}
-                  </p>
-                )}
+                {errors.message && <p id="message-error" className="text-red-400 text-xs mt-1" role="alert">{errors.message}</p>}
               </div>
 
-              <button type="submit" className="btn-primary w-full justify-center">
-                <FaPaperPlane aria-hidden="true" />
-                Send Message
+              <button
+                type="submit"
+                disabled={status === 'sending'}
+                className="btn-primary w-full justify-center disabled:opacity-60 disabled:cursor-not-allowed"
+              >
+                {status === 'sending' ? (
+                  <>
+                    <FaSpinner className="animate-spin" aria-hidden="true" />
+                    Sending...
+                  </>
+                ) : (
+                  <>
+                    <FaPaperPlane aria-hidden="true" />
+                    Send Message
+                  </>
+                )}
               </button>
             </form>
           )}
