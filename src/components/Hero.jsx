@@ -253,7 +253,7 @@ export default function Hero() {
               className="grid grid-cols-3 gap-4 w-full max-w-sm"
             >
               {[
-                { value: '2+', label: 'Years Study' },
+                { value: '3+', label: 'Years Study' },
                 { value: '4+', label: 'Projects' },
                 { value: '2', label: 'Certifications' },
               ].map(({ value, label }) => (
