@@ -96,7 +96,7 @@ export default function Certifications() {
               </div>
 
               {/* Verified badge */}
-              <div className="mt-auto">
+              <div className="mt-auto flex items-center gap-3">
                 <span
                   className="inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-full"
                   style={{ background: `${cert.color}15`, color: cert.color }}
@@ -104,6 +104,17 @@ export default function Certifications() {
                   <FaCheckCircle size={10} aria-hidden="true" />
                   Verified Certificate
                 </span>
+                {cert.credlyUrl && (
+                  <a
+                    href={cert.credlyUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs text-slate-500 hover:text-cyan-400 transition-colors underline underline-offset-2"
+                    aria-label={`Verify ${cert.title} on Credly`}
+                  >
+                    View on Credly ↗
+                  </a>
+                )}
               </div>
             </motion.article>
           );

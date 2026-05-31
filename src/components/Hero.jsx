@@ -213,20 +213,12 @@ export default function Hero() {
                 }}
               >
                 <div className="w-full h-full rounded-full bg-slate-900 flex items-center justify-center overflow-hidden">
-                  {/* Profile image placeholder */}
-                  <div
-                    className="w-full h-full flex flex-col items-center justify-center"
-                    style={{
-                      background: 'linear-gradient(135deg, #0a1628 0%, #0d2040 50%, #0a1628 100%)',
-                    }}
-                    role="img"
-                    aria-label="Profile photo placeholder for Mc Lloyd Silverio Ilagan"
-                  >
-                    <div className="text-6xl sm:text-7xl font-extrabold gradient-text select-none">
-                      ML
-                    </div>
-                    <div className="text-xs text-slate-500 font-mono mt-1">Profile Photo</div>
-                  </div>
+                  {/* Real profile photo */}
+                  <img
+                    src="/mclloyd-ilagan-portfolio/profile.jpg"
+                    alt="Mc Lloyd Silverio Ilagan — profile photo"
+                    className="w-full h-full object-cover object-top"
+                  />
                 </div>
               </div>
 

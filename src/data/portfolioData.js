@@ -5,9 +5,9 @@ export const personalInfo = {
   email: "Lloydilagan771@gmail.com",
   phone: "+63 992 529 3843",
   github: "https://github.com/McLloydIlagan",
-  linkedin: "https://linkedin.com/in/mclloydilagan",
+  linkedin: "https://www.linkedin.com/in/lloyd-ilagan-451279241/",
   location: "Philippines",
-  bio: "Detail-oriented Computer Science student with experience in cybersecurity, programming, and data analytics. Passionate about protecting systems, analyzing data, and building innovative technology solutions.",
+  bio: "Detail-oriented Cybersecurity professional with knowledge of the NIST Framework, security controls, and data protection practices. Dedicated to protecting organizational systems and ensuring compliance with cybersecurity standards and regulations.",
 };
 
 export const aboutPoints = [
@@ -133,6 +133,7 @@ export const certifications = [
       "Risk Management",
       "Security Operations",
     ],
+    credlyUrl: "https://www.credly.com/badges/fedcabb2-767f-4556-8983-0e9979b4e9b0/linked_in_profile",
   },
   {
     title: "Living Online Certificate",
@@ -147,40 +148,11 @@ export const certifications = [
       "Internet Fundamentals",
       "Digital Citizenship",
     ],
+    credlyUrl: "https://www.credly.com/badges/06e4303f-1ea6-4496-bd7a-bc48ae07ddd1/public_url",
   },
 ];
 
 export const projects = [
-  {
-    title: "Pokémon Battle Simulation",
-    description:
-      "A Python-based battle simulator featuring turn-based combat mechanics, damage calculation algorithms, and type effectiveness logic inspired by the Pokémon game series.",
-    tech: ["Python"],
-    color: "#00d4ff",
-    icon: "FaGamepad",
-    highlights: ["Battle logic engine", "Damage calculation", "Type effectiveness system"],
-    github: "https://github.com/McLloydIlagan",
-  },
-  {
-    title: "UPHSL Pathfinder",
-    description:
-      "Emergency response routing system for the UPHSL campus using the A* pathfinding algorithm with an interactive GUI built in Tkinter.",
-    tech: ["Python", "Tkinter", "A* Algorithm"],
-    color: "#0066ff",
-    icon: "FaMapMarkedAlt",
-    highlights: ["A* pathfinding", "Emergency routing", "Interactive campus map"],
-    github: "https://github.com/McLloydIlagan",
-  },
-  {
-    title: "Condominium Showcase Website",
-    description:
-      "A fully responsive real estate showcase website built with WordPress and Elementor, featuring property listings, image galleries, and contact forms.",
-    tech: ["WordPress", "Elementor", "CSS"],
-    color: "#7c3aed",
-    icon: "FaBuilding",
-    highlights: ["Responsive design", "Property listings", "Contact integration"],
-    github: "https://github.com/McLloydIlagan",
-  },
   {
     title: "Cryptocurrency Analysis Tool",
     description:
@@ -189,6 +161,36 @@ export const projects = [
     color: "#10b981",
     icon: "FaChartLine",
     highlights: ["Price prediction", "ML models", "Technical indicators"],
+    github: "https://github.com/McLloydIlagan/Cryptocurrency_Analysis_Tool",
+  },
+  {
+    title: "MoodlePlus",
+    description:
+      "An enhanced Moodle-based learning management system extension with additional features for students and educators.",
+    tech: ["Web Development", "LMS", "PHP"],
+    color: "#0066ff",
+    icon: "FaBookOpen",
+    highlights: ["LMS enhancement", "Student tools", "Educator features"],
+    github: "https://github.com/McLloydIlagan/MoodlePlus",
+  },
+  {
+    title: "ILISY Golf & Country Club Enrollment System",
+    description:
+      "A full-featured enrollment and membership management system for ILISY Golf and Country Club, handling member registration and records.",
+    tech: ["Java", "Database", "Desktop App"],
+    color: "#7c3aed",
+    icon: "FaClipboardList",
+    highlights: ["Member registration", "Records management", "Desktop GUI"],
+    github: "https://github.com/McLloydIlagan/ILISY_Golf_And_Country_Club_Enrollment_System",
+  },
+  {
+    title: "Pokémon Battle Simulation",
+    description:
+      "A Python-based battle simulator featuring turn-based combat mechanics, damage calculation algorithms, and type effectiveness logic inspired by the Pokémon game series.",
+    tech: ["Python"],
+    color: "#00d4ff",
+    icon: "FaGamepad",
+    highlights: ["Battle logic engine", "Damage calculation", "Type effectiveness system"],
     github: "https://github.com/McLloydIlagan",
   },
 ];
