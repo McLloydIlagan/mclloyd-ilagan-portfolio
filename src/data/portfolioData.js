@@ -98,6 +98,19 @@ export const experience = [
       "Implemented corrective technical solutions to minimize downtime",
     ],
   },
+  {
+    role: "Software Development Intern",
+    company: "Codeyani IT Solutions",
+    period: "June 2026 – July 2026",
+    type: "Internship",
+    responsibilities: [
+      "Contributed to the Yani Pi Assistant and Yani website, implementing features like social media integration, post generation, page-status analytics, and secure token handling",
+      "Integrated the Facebook Graph API for social media features and implemented two-way AES-256-GCM encryption for sensitive token security",
+      "Participated in Daily Stand-Up (DSM) meetings, presented progress to supervisors, and collaborated with co-interns on debugging and task division",
+      "Managed version control discipline by creating dedicated branches, writing clear commit messages, and submitting pull requests for review",
+      "Successfully presented the final demo of the Yani Pi Assistant with Social Media integration after weeks of troubleshooting and testing",
+    ],
+  },
 ];
 
 export const education = [
